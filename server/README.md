@@ -1,8 +1,8 @@
 ## Routes
 
-    baseRout => /api/v1/user
-
 ### User Routs
+
+baseRout => /api/v1/user
 
 #### open
 
@@ -15,6 +15,8 @@
     /getUsers
 
 ### Product Routs
+
+baseRout => /api/v1/product
 
 #### open
 
