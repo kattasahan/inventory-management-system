@@ -1,5 +1,5 @@
 import Navbar from "@/components/custom/navbar";
-import Router from "@/Router";
+import Router from "@/layout/Router";
 
 function Layout() {
   return (

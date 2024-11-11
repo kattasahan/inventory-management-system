@@ -2,8 +2,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Products from "@/pages/Products";
-import NotFound from "@/NotFound";
-import Dashboard from "./pages/Dashboard";
+import NotFound from "@/layout/NotFound";
+import Dashboard from "@/pages/Dashboard";
 
 export default function Router() {
   const routes = [

@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@/components/theme-provider";
-import Layout from "@/Layout";
+import Layout from "@/layout/Layout";
 import { store } from "@/redux/store";
 
 function App() {
