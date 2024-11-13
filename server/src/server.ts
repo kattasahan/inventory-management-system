@@ -13,7 +13,14 @@ const app = express();
 const port = 3000;
 
 // MiddleWares
-app.use(cors());
+app.use(
+  cors(
+    {
+      origin: true,
+      credentials: true,
+    }
+  )
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

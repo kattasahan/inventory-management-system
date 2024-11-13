@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import asyncHandler from "express-async-handler";
 import { UserLoginSchema, UserRegisterSchema } from "../models/userModels";
+import { COOKIE_OPTIONS } from "../constants";
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -19,7 +20,7 @@ const generateToken = (id: string) => {
 //   "role": "ADMIN"
 // }
 const registerUser = asyncHandler(async (req: Request, res: Response) => {
-  const { username, email, password, role } = req.body;
+  const { username, email, password, role, secret } = req.body;
 
   // Zod Validations
   const zRes = UserRegisterSchema.safeParse({
@@ -27,11 +28,17 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
     email,
     password,
     role,
+    secret,
   });
 
   if (zRes.error) {
     res.status(400);
-    throw new Error(zRes.error.toString());
+    throw new Error(JSON.stringify(zRes.error.format()));
+  }
+
+  if (role === "ADMIN" && (!secret || secret !== process.env.ADMIN_SECRET)) {
+    res.status(400);
+    throw new Error("Invalid Secret");
   }
 
   // Existing email check
@@ -74,8 +81,9 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
   // Response
   if (newUser) {
     res.send({
-      message: "Signup Successful",
+      message: "Signup Successfull!",
       success: true,
+      role: newUser.role,
     });
   } else {
     res.status(500);
