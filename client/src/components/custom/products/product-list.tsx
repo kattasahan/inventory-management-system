@@ -10,8 +10,13 @@ export default function ProductList() {
 
   useEffect(() => {
     dispatch(fetchProducts());
+    
     return () => {};
   }, []);
+
+  if (products.error) {
+    return <>{JSON.stringify(JSON.parse(products.error))}</>;
+  }
 
   return (
     <div className="flex flex-wrap gap-2 mt-4 sm:justify-center md:justify-normal h-fit max-h-full overflow-y-auto">

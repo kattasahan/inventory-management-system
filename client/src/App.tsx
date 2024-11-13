@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "@/components/theme-provider";
 import Layout from "@/layout/Layout";
 import { store } from "@/redux/store";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <Provider store={store}>
             <Layout />
+            <Toaster />
           </Provider>
         </ThemeProvider>
       </BrowserRouter>
