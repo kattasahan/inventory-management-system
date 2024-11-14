@@ -1,3 +1,10 @@
+export interface AllProductsResponse {
+  products: Product[];
+  success: boolean;
+  message?: string;
+  title: string;
+}
+
 export interface Product {
   id: string;
   name: string;
