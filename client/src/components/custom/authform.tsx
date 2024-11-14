@@ -2,31 +2,103 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeClosed } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks/default";
+import { register } from "@/redux/slicers/authSlicer";
+import { RegisterPayload } from "@/models/auth.model";
+// import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 export default function Authform({
   type,
   role,
 }: {
-  role?: "user" | "admin";
+  role?: "USER" | "ADMIN";
   type: "login" | "register";
 }) {
-  const formInitState = { email: "", password: "", secret: "" };
+  const formInitState = { username: "", email: "", password: "", secret: "" };
   const [form, setForm] = useState(formInitState);
   const [show, setShow] = useState({ showPassword: false, showSecret: false });
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { toast } = useToast();
+
+  const userData = useAppSelector((state) => state.auth);
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const submitForm = () => {};
+  const submitForm = () => {
+    const validateForm = {
+      ADMIN: !form.username || !form.secret || !form.email || !form.password,
+      USER: !form.username || !form.email || !form.password,
+      LOGIN: !form.email || !form.password,
+    };
+
+    const missingFields = () =>
+      toast({
+        variant: "destructive",
+        title: "Required fields are missing!",
+        description: "Please enter all fields.",
+      });
+
+    if (type === "register" && role) {
+      if (validateForm[role]) {
+        missingFields();
+        return;
+      }
+
+      const payload: RegisterPayload = {
+        ...form,
+        role,
+      };
+
+      dispatch(register(payload)).then((action) => {
+        if (action.payload?.success) {
+          localStorage.setItem("role", action.payload?.role);
+
+          toast({
+            title: action.payload?.message,
+          });
+          navigate("/products");
+          return;
+        }
+        if (userData.error) {
+          toast({
+            variant: "destructive",
+            title: userData.error.message,
+          });
+        }
+      });
+    } else {
+      if (validateForm.LOGIN) {
+        missingFields();
+        return;
+      }
+    }
+  };
 
   const clearForm = () => {
     setForm(formInitState);
   };
   return (
     <>
+      {type === "register" && (
+        <div className="w-full">
+          <Label htmlFor="username">Name</Label>
+          <Input
+            id="username"
+            value={form.username}
+            type="text"
+            placeholder="John"
+            onChange={handleInput}
+          />
+        </div>
+      )}
       <div className="w-full">
         <Label htmlFor="email">Email</Label>
         <Input
@@ -60,7 +132,7 @@ export default function Authform({
           </Button>
         </div>
       </div>
-      {type === "register" && role === "admin" && (
+      {type === "register" && role === "ADMIN" && (
         <div className="w-full">
           <Label htmlFor="secret">Secret</Label>
           <div className="flex w-full gap-1">

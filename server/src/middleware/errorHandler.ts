@@ -10,6 +10,7 @@ export const errorHandler = (
   res.send({
     title: ERRORS[res.statusCode || "123"] || "Contact Dev",
     message: err.message,
+    success: false,
     stackTrace: process.env.NODE_ENV === "development" ? err.stack : null,
   });
 };

@@ -6,7 +6,7 @@ function Navbar() {
   // const routes = [{path:"/login"}]
   return (
     <>
-      <div className="w-full flex items-center justify-between border-b-2 gap-4 pb-2">
+      <div className="w-full flex items-center justify-between border gap-4 py-2 px-6 shadow-md rounded-[50rem]">
         <div className="w-full flex justify-between">
           <div className="flex gap-2">
             {/* <Box /> */}

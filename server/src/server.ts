@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import express, { Request, Response } from "express";
+import express from "express";
 import { errorHandler } from "./middleware/errorHandler";
 import userRouter from "./routes/userRouter";
 import productRouter from "./routes/productRouter";
@@ -13,7 +13,12 @@ const app = express();
 const port = 3000;
 
 // MiddleWares
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

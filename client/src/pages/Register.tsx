@@ -4,17 +4,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function Register() {
   const roles: {
-    role: "user" | "admin";
+    role: "USER" | "ADMIN";
     label: string;
   }[] = [
-    { role: "user", label: "User" },
-    { role: "admin", label: "Admin" },
+    { role: "USER", label: "User" },
+    { role: "ADMIN", label: "Admin" },
   ];
   return (
     <>
-      <div className="h-full m-auto max-w-80 min-w-72 flex flex-col items-center justify-center">
-        <h2 className="text-2xl font-bold mb-4">Register</h2>
-        <Tabs defaultValue="user" className="w-full">
+      <div className="h-[90%] m-auto max-w-80 min-w-72 mt-20">
+        <div className="flex justify-center">
+          <h2 className="text-2xl font-bold mb-4">Register</h2>
+        </div>
+        <Tabs defaultValue="USER" className="w-full">
           <TabsList className="w-full">
             {roles.map((role) => (
               <TabsTrigger
