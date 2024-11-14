@@ -1,12 +1,7 @@
-import { RegisterPayload } from "@/models/auth.model";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "@/redux/axios/axios";
-
-export interface AuthState {
-  isLoading: boolean;
-  data: any;
-  error: any;
-}
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { RegisterPayload } from "@/models/auth.model";
+import { AuthState } from "@/redux/models/auth.model";
 
 const initialState: AuthState = {
   isLoading: false,

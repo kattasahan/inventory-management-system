@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks/default";
 import { register } from "@/redux/slicers/authSlicer";
 import { RegisterPayload } from "@/models/auth.model";
 // import { toast } from "sonner";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/components/ui/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 
 export default function Authform({
