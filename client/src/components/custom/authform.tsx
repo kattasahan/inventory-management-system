@@ -1,15 +1,13 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeClosed } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/hooks/use-toast";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks/default";
 import { register } from "@/redux/slicers/authSlicer";
 import { RegisterPayload } from "@/models/auth.model";
-// import { toast } from "sonner";
-import { useToast } from "@/components/ui/hooks/use-toast";
-import { ToastAction } from "@/components/ui/toast";
 
 export default function Authform({
   type,

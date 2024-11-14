@@ -1,6 +1,6 @@
+import { Pencil, Trash2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2 } from "lucide-react";
 import { Product } from "@/models/product.model";
 
 export default function ProductCard({
