@@ -93,8 +93,12 @@ export default function Authform({
             value={form.username}
             type="text"
             placeholder="John"
+            required={type === "register" ? true : false}
             onChange={handleInput}
           />
+          <span className="text-xs text-red-500">
+            Name should be 3-23 characters
+          </span>
         </div>
       )}
       <div className="w-full">
@@ -104,8 +108,10 @@ export default function Authform({
           value={form.email}
           type="email"
           placeholder="john@gmail.com"
+          required
           onChange={handleInput}
         />
+        <span className="text-xs text-red-500">Invalid Email</span>
       </div>
       <div className="w-full">
         <Label htmlFor="password">Password</Label>
@@ -116,7 +122,9 @@ export default function Authform({
             type={show.showPassword ? "text" : "password"}
             placeholder="zFgr&5sL"
             className="grow"
+            pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/"
             onChange={handleInput}
+            required
           />
           <Button
             id="showPassword"
@@ -129,6 +137,9 @@ export default function Authform({
             {show.showPassword ? <Eye /> : <EyeClosed />}
           </Button>
         </div>
+        <span className="text-xs text-red-500">
+          Password should be 8-23 characters
+        </span>
       </div>
       {type === "register" && role === "ADMIN" && (
         <div className="w-full">
@@ -140,6 +151,7 @@ export default function Authform({
               type={show.showSecret ? "text" : "password"}
               placeholder="********"
               className="w-full"
+              required
               onChange={handleInput}
             />
             <Button

@@ -7,7 +7,7 @@ const isValidEmail = z
 const isValidPassword = z
   .string({ required_error: "Password is required" })
   .min(8, { message: "Password should contain atleast 8 characters" })
-  .max(23, { message: "Password should not exceed 20 characters" });
+  .max(23, { message: "Password should not exceed 23 characters" });
 
 export const UserRegisterSchema = z
   .object({
