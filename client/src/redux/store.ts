@@ -1,15 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "@/redux/slicers/authSlicer";
-import { productApi } from "./queries/productApi";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import authReducer from "@/redux/slicers/authSlicer";
+import { configureStore } from "@reduxjs/toolkit";
+import { productQuery } from "@/redux/queries/productApi";
 
 export const store = configureStore({
   reducer: {
-    [productApi.reducerPath]: productApi.reducer,
+    [productQuery.reducerPath]: productQuery.reducer,
     auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productApi.middleware),
+    getDefaultMiddleware().concat(productQuery.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

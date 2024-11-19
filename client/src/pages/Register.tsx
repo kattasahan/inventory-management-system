@@ -1,4 +1,4 @@
-import Authform, { ToggleForm } from "@/components/custom/authform";
+import Authform, { ToggleForm } from "@/components/custom/auth-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
